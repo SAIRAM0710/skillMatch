@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import  norequest  from '../assets/norequest.jpg'
 
 const ClientService = () => {
   const [bookings, setBookings] = useState([]);
@@ -30,7 +31,26 @@ const ClientService = () => {
   }
 
   if (bookings === null) {
-    return <img src="norequest.jpeg" alt="No Requests" />;
+    return (
+    <div className="container">
+      <div className="d-flex justify-content-end">
+        <button
+          className="btn btn-primary mb-3 mt-3"
+          onClick={() => navigate('/client-request')}
+        >
+        Raise Request
+        </button>
+      </div>
+      <img src={norequest} alt="No Requests" />
+      <div className="d-flex justify-content-center">
+          <button
+            className="btn btn-primary mb-3 mt-3"
+            onClick={() => navigate('/client-home')}
+          >
+            Back
+          </button>
+      </div>
+    </div>);
   }
 
   return (
@@ -43,7 +63,6 @@ const ClientService = () => {
         Raise Request
         </button>
       </div>
-
 
       <table className="table table-bordered" style={{ padding: '20px' }}>
         <thead>

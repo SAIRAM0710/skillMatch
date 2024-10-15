@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import viewServiceImage from '../assets/viewService.png'; // Assuming image is in assets folder
+import viewServiceImage from '../assets/servLogo.png'; // Assuming image is in assets folder
 import './ViewServices.css'; // Import external CSS for styling
 
 const ViewServices = () => {
@@ -35,8 +35,8 @@ const ViewServices = () => {
         <table className="table table-hover table-bordered">
           <thead style={{ backgroundColor: '#5600E8', color: '#fff' }}>
             <tr>
-              <th style={{ width: '10%',backgroundColor: '#3700B3', color: 'white' }}>S. No</th>
-              <th style={{ width: '90%',backgroundColor: '#3700B3', color: 'white' }}>Services</th>
+              <th style={{ width: '30%',backgroundColor: '#3700B3', color: 'white' }}>S. No</th>
+              <th style={{ width: '70%',backgroundColor: '#3700B3', color: 'white' }}>Services</th>
             </tr>
           </thead>
           <tbody style={{ backgroundColor: '#DBB2FF' }}>

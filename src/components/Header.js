@@ -42,7 +42,8 @@ const Header = () => {
   return (
     <header className="d-flex justify-content-between align-items-center p-3" style={{ backgroundColor: '#23036A' }}>
       <div>
-        <img src={SMlogo} alt="Skill Match Logo" style={{ height: '50px' }} />
+        {/* <img src={SMlogo} alt="Skill Match Logo" style={{ height: '50px' }} /> */}
+        <h3 style={{ fontWeight: 'bold', color: 'white'}}>Skill Match</h3>
       </div>
       <div className="d-flex align-items-center">
         {/* Show "Service" link only if the user is logged in and the role is "Client" */}

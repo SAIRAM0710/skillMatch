@@ -11,10 +11,13 @@ import ViewWorker from './components/ViewWorker'; // Import ViewWorker
 import ViewServices from './components/ViewServices'; // Import ViewServices
 import ClientService from './components/ClientService';
 import ClientRequest from './components/ClientRequest';
+import WorkerRequest from './components/WorkerRequest';
+import WorkerAccept from './components/WorkerAccept';
 import "bootstrap/dist/css/bootstrap.css";
 import ClientMeeting from './components/ClientMeeting';
 import Rating from './components/Rating';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'react-bootstrap';
 
 
 const App = () => {
@@ -33,6 +36,8 @@ const App = () => {
         <Route path="/client-request" element={<ClientRequest />} />
         <Route path="/client-meeting" element={<ClientMeeting />} />
         <Route path="/rating" element={<Rating />} />
+        <Route path="/worker-request" element={<WorkerRequest />} />
+        <Route path="/worker-accept" element={<WorkerAccept/>} />
         <Route path="/forgot-password" element={<div>Forgot Password Page</div>} />
       </Routes>
     </Router>
