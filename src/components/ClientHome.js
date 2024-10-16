@@ -1,21 +1,22 @@
 // src/components/ClientHome.js
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
-import ServicesLogo from '../assets/SevicesLogo.jpg'; // Import services image
-import WorkerLogo from '../assets/worker.jpg'; // Import worker image
-import './ClientHome.css'; // Import CSS file for styles
+import { useLocation, useNavigate } from 'react-router-dom'; 
+import ServicesLogo from '../assets/SevicesLogo.jpg'; 
+import WorkerLogo from '../assets/worker.jpg'; 
+import './ClientHome.css'; 
 
 const ClientHome = () => {
   const location = useLocation();
-  const { name } = location.state || {}; // Get name from location state
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate(); 
+  const storedUserData = JSON.parse(sessionStorage.getItem('userData'));
+  const { name } = storedUserData || {};
 
   const handleViewServices = () => {
-    navigate('/view-services'); // Navigate to ViewServices page
+    navigate('/view-services'); 
   };
 
   const handleViewWorker = () => {
-    navigate('/view-worker'); // Navigate to ViewWorker page
+    navigate('/view-worker'); 
   };
 
   return (
@@ -28,9 +29,11 @@ const ClientHome = () => {
           <div className="card-body">
             <h5 className="card-title">Available Services</h5>
             <p className="card-text">Explore our services and find the one that fits your needs.</p>
-            <button className="btn btn-primary" onClick={handleViewServices}>
-              View
-            </button>
+            <div className="mt-auto d-flex justify-content-center">
+              <button className="btn btn-primary" onClick={handleViewServices}>
+                View
+              </button>
+            </div>
           </div>
         </div>
 
@@ -40,10 +43,12 @@ const ClientHome = () => {
           <div className="card-body">
             <h5 className="card-title">Workers</h5>
             <p className="card-text">Browse through our skilled workers ready to help you.</p>
-            <button className="btn btn-primary" onClick={handleViewWorker}>
-              View
-            </button>
-          </div>
+            <div className="mt-auto d-flex justify-content-center">
+              <button className="btn btn-primary" onClick={handleViewWorker}>
+                View
+              </button>
+              </div>
+            </div>
         </div>
       </div>
     </div>

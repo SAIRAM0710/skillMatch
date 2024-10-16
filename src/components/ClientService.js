@@ -41,14 +41,14 @@ const ClientService = () => {
         Raise Request
         </button>
       </div>
-      <img src={norequest} alt="No Requests" />
-      <div className="d-flex justify-content-center">
-          <button
-            className="btn btn-primary mb-3 mt-3"
-            onClick={() => navigate('/client-home')}
-          >
-            Back
-          </button>
+      <div className="d-flex flex-column justify-content-center align-items-center">
+          <img src={norequest} alt="No Requests" style={{ width: '300px', height: '300px' }} />
+        <button
+          className="btn btn-primary mb-3 mt-3"
+          onClick={() => navigate('/client-home')}
+        >
+        Back
+        </button>
       </div>
     </div>);
   }
@@ -87,7 +87,7 @@ const ClientService = () => {
               <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>
                 <i
                   className="bi bi-calendar-date"
-                  onClick={() => navigate('/client-meeting', { state: { meeting: booking.meeting } })}
+                  // onClick={() => navigate('/client-meeting', { state: { meeting: booking.meeting } })}
                 />
               </td>
               <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>
@@ -96,7 +96,7 @@ const ClientService = () => {
                 ) : ( booking.wratingstatus===0 ?
                   (<i
                     className="bi bi-star"
-                    onClick={() => navigate('/rating', { state: { bookingId: booking.id, workerId: booking.wid } })}
+                    // onClick={() => navigate('/rating', { state: { bookingId: booking.id, workerId: booking.wid } })}
                   />):(<i class="bi bi-star-fill" ></i>)
                 )}
               </td>

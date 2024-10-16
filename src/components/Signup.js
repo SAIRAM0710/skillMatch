@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { auth, db } from '../firebase'; // Import Firebase auth and Firestore
+import { auth, db } from '../firebase'; 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc, collection, getDocs } from 'firebase/firestore'; // Import Firestore functions
+import { doc, setDoc, collection, getDocs } from 'firebase/firestore'; 
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [contact, setContact] = useState(''); // Contact field
-  const [address, setAddress] = useState(''); // Address field
-  const [role, setRole] = useState('Client'); // Default role
-  const [service, setService] = useState([]); // Service array (for Worker)
-  const [selectedService, setSelectedService] = useState(''); // For storing selected service temporarily
-  const [servicesList, setServicesList] = useState([]); // State for services fetched from Firestore
-  const [error, setError] = useState(''); // Error message state
-  const navigate = useNavigate(); // Hook for navigation
+  const [contact, setContact] = useState(''); 
+  const [address, setAddress] = useState(''); 
+  const [role, setRole] = useState('Client'); 
+  const [service, setService] = useState([]); 
+  const [selectedService, setSelectedService] = useState(''); 
+  const [servicesList, setServicesList] = useState([]); 
+  const [error, setError] = useState(''); 
+  const navigate = useNavigate(); 
 
   useEffect(() => {
-    // Fetch services from Firestore when the component mounts
+    
     const fetchServices = async () => {
       try {
         const servicesSnapshot = await getDocs(collection(db, 'services'));
@@ -38,7 +38,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Clear any previous error message
+    setError(''); 
 
     try {
       // Create user with email and password

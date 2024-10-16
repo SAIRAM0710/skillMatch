@@ -35,9 +35,11 @@ const ViewWorker = () => {
     return (
         <div className="container">
             <div className="text-left mt-2"> {/* Reduced margin-top from mt-4 to mt-2 */}
-                <button className="btn btn-primary" onClick={handleBackClick}>
-                    Back
-                </button>
+            <i 
+                className="bi bi-arrow-left-circle-fill" 
+                style={{ fontSize: '2rem', cursor: 'pointer', top: '10px', left: '10px' }} 
+                onClick={() => navigate('/client-home')}
+            ></i>
             </div>
             <h1 className="text-center mt-3" style={{ fontWeight: 'bold', color: '#3700B3' }}>
                 Available Workers

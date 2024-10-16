@@ -94,19 +94,6 @@ const Login = () => {
                   required
                 />
               </div>
-              <div className="d-flex align-items-center justify-content-between">
-                
-                <div>
-                  <button
-                    type="button"
-                    onClick={handleForgotPassword}
-                    className="btn btn-link"
-                    style={{ padding: 0 }}
-                  >
-                    Forget Password?
-                  </button>
-                </div>
-              </div>
               <div className="pb-2">
                 <button type="submit" className="btn btn-dark w-100 font-weight-bold mt-2">
                   Submit
