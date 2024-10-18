@@ -96,7 +96,7 @@ const ClientService = () => {
                 ) : ( booking.wratingstatus===0 ?
                   (<i
                     className="bi bi-star"
-                    // onClick={() => navigate('/rating', { state: { bookingId: booking.id, workerId: booking.wid } })}
+                    onClick={() => navigate('/rating', { state: { bookingId: booking.id, workerId: booking.wid } })}
                   />):(<i class="bi bi-star-fill" ></i>)
                 )}
               </td>
