@@ -1,17 +1,14 @@
-// Signup.js
 import React, { useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
-import { createUserWithEmailAndPassword, signOut } from 'firebase/auth';
-import { doc, setDoc, collection, getDocs } from 'firebase/firestore';
+import { doc, updateDoc, getDoc, collection, getDocs } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
-const Signup = () => {
+const Edit = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [contact, setContact] = useState('');
   const [address, setAddress] = useState('');
-  const [role, setRole] = useState('Client');
+  const [role, setRole] = useState('');
   const [service, setService] = useState([]);
   const [selectedService, setSelectedService] = useState('');
   const [servicesList, setServicesList] = useState([]);
@@ -19,6 +16,23 @@ const Signup = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchUserData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userRef = doc(db, 'users', user.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
+          setName(userData.name);
+          setEmail(userData.email);
+          setContact(userData.contact);
+          setAddress(userData.address);
+          setRole(userData.role);
+          setService(userData.services || []);
+        }
+      }
+    };
+
     const fetchServices = async () => {
       try {
         const servicesSnapshot = await getDocs(collection(db, 'services'));
@@ -28,24 +42,33 @@ const Signup = () => {
         }));
         setServicesList(servicesArray);
       } catch (error) {
-        console.error('Error fetching services:', error);
         setError('Failed to load services.');
       }
     };
 
+    fetchUserData();
     fetchServices();
   }, []);
+
+  const handleBack = () => {
+    if (role === 'Client') {
+      navigate('/client-home');
+    } else if (role === 'Worker') {
+      navigate('/worker-home');
+    } else if (role === 'Admin') {
+      navigate('/admin-home');
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
       const user = auth.currentUser;
-
       if (user) {
-        const userData = {
+        const userRef = doc(db, 'users', user.uid);
+        const updatedData = {
           name,
           email,
           contact,
@@ -54,19 +77,13 @@ const Signup = () => {
           services: role === 'Worker' ? service : [],
         };
 
-        if (role === 'Worker') {
-          userData.rating = 0;
-          userData.ratingGivenCount = 0;
-          userData.reviews = '';
-        }
+        await updateDoc(userRef, updatedData);
 
-        await setDoc(doc(db, 'users', user.uid), userData);
+        // Navigate to the correct home screen based on role
+        handleBack();
       }
-
-      await signOut(auth); // Sign out the user to reset authentication state
-      navigate('/'); // Navigate back to login page
     } catch (error) {
-      setError('Failed to sign up. Please check your credentials.');
+      setError('Failed to update profile. Please try again.');
     }
   };
 
@@ -77,10 +94,25 @@ const Signup = () => {
     }
   };
 
+  const handleRemoveService = (serviceToRemove) => {
+    setService(service.filter(s => s !== serviceToRemove));
+  };
+
   return (
     <div className="container mt-5">
+      {/* Back icon positioned at the top left */}
+      <i
+        className="bi bi-arrow-left-circle-fill"
+        style={{
+          fontSize: '2rem',
+          cursor: 'pointer',
+          top: '10px',
+          left: '10px',
+        }}
+        onClick={handleBack}
+      ></i>
       <div className="card mt-4 p-4">
-        <h1 className="text-center font-weight-bold">Sign Up</h1>
+        <h1 className="text-center font-weight-bold">Edit Profile</h1>
         {error && <p className="text-danger text-center">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group mb-3">
@@ -101,16 +133,7 @@ const Signup = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-            />
-          </div>
-          <div className="form-group mb-3">
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
+              disabled // Email should not be editable
             />
           </div>
           <div className="form-group mb-3">
@@ -132,22 +155,6 @@ const Signup = () => {
               onChange={(e) => setAddress(e.target.value)}
               required
             />
-          </div>
-          <div className="form-group mb-3">
-            <label>Role</label>
-            <select
-              className="form-control"
-              value={role}
-              onChange={(e) => {
-                setRole(e.target.value);
-                if (e.target.value !== 'Worker') {
-                  setService([]);
-                }
-              }}
-            >
-              <option value="Client">Client</option>
-              <option value="Worker">Worker</option>
-            </select>
           </div>
           {role === 'Worker' && (
             <>
@@ -175,18 +182,26 @@ const Signup = () => {
               </button>
               <ul className="list-group mb-3">
                 {service.map((s, index) => (
-                  <li key={index} className="list-group-item">
+                  <li key={index} className="list-group-item d-flex justify-content-between">
                     {s}
+                    <button
+                      type="button"
+                      className="btn btn-danger btn-sm"
+                      onClick={() => handleRemoveService(s)}
+                    >
+                      Remove
+                    </button>
                   </li>
                 ))}
               </ul>
             </>
           )}
-          <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+          <button type="submit" className="btn btn-primary btn-block">Save Changes</button>
         </form>
       </div>
     </div>
   );
 };
 
-export default Signup;
+export default Edit;
+    

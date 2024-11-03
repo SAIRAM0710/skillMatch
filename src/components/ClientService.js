@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import  norequest  from '../assets/norequest.jpg'
+import norequest from '../assets/norequest.jpg';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const ClientService = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedBooking, setSelectedBooking] = useState(null); // State for the selected booking's meeting
+  const [showModal, setShowModal] = useState(false); // State for modal visibility
   const navigate = useNavigate();
   const db = getFirestore();
   const userData = JSON.parse(sessionStorage.getItem('userData'));
@@ -26,41 +29,43 @@ const ClientService = () => {
     fetchBookings();
   }, [db, userId]);
 
+  const handleShowMeeting = (booking) => {
+    setSelectedBooking(booking);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedBooking(null);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (bookings === null) {
     return (
-    <div className="container">
-      <div className="d-flex justify-content-end">
-        <button
-          className="btn btn-primary mb-3 mt-3"
-          onClick={() => navigate('/client-request')}
-        >
-        Raise Request
-        </button>
-      </div>
-      <div className="d-flex flex-column justify-content-center align-items-center">
+      <div className="container">
+        <div className="d-flex justify-content-end">
+          <button className="btn btn-primary mb-3 mt-3" onClick={() => navigate('/client-request')}>
+            Raise Request
+          </button>
+        </div>
+        <div className="d-flex flex-column justify-content-center align-items-center">
           <img src={norequest} alt="No Requests" style={{ width: '300px', height: '300px' }} />
-        <button
-          className="btn btn-primary mb-3 mt-3"
-          onClick={() => navigate('/client-home')}
-        >
-        Back
-        </button>
+          <button className="btn btn-primary mb-3 mt-3" onClick={() => navigate('/client-home')}>
+            Back
+          </button>
+        </div>
       </div>
-    </div>);
+    );
   }
 
   return (
     <div className="container">
       <div className="d-flex justify-content-end">
-        <button
-          className="btn btn-primary mb-3 mt-3"
-          onClick={() => navigate('/client-request')}
-        >
-        Raise Request
+        <button className="btn btn-primary mb-3 mt-3" onClick={() => navigate('/client-request')}>
+          Raise Request
         </button>
       </div>
 
@@ -87,31 +92,65 @@ const ClientService = () => {
               <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>
                 <i
                   className="bi bi-calendar-date"
-                  // onClick={() => navigate('/client-meeting', { state: { meeting: booking.meeting } })}
+                  onClick={() => handleShowMeeting(booking)}
+                  style={{ cursor: 'pointer' }}
                 />
               </td>
               <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>
                 {booking.status === 'Pending' ? (
                   'N/A'
-                ) : ( booking.wratingstatus===0 ?
-                  (<i
-                    className="bi bi-star"
-                    onClick={() => navigate('/rating', { state: { bookingId: booking.id, workerId: booking.wid } })}
-                  />):(<i class="bi bi-star-fill" ></i>)
+                ) : (
+                  booking.wratingstatus === 0 ? (
+                    <i
+                      className="bi bi-star"
+                      onClick={() => navigate('/rating', { state: { bookingId: booking.id, workerId: booking.wid, service: booking.service } })}
+                      style={{ cursor: 'pointer' }}
+                    />
+                  ) : (
+                    <i className="bi bi-star-fill" />
+                  )
                 )}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
       <div className="d-flex justify-content-center">
-          <button
-            className="btn btn-primary mb-3 mt-3"
-            onClick={() => navigate('/client-home')}
-          >
-            Back
-          </button>
+        <button className="btn btn-primary mb-3 mt-3" onClick={() => navigate('/client-home')}>
+          Back
+        </button>
       </div>
+
+      {/* Meeting Modal */}
+      {showModal && selectedBooking && (
+        <div className="modal show d-block" tabIndex="-1">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Meeting Details</h5>
+                <button type="button" className="btn-close" onClick={handleCloseModal}></button>
+              </div>
+              <div className="modal-body">
+                {selectedBooking.meeting && selectedBooking.meeting.length > 0 ? (
+                  selectedBooking.meeting.map((meeting, index) => (
+                    <div key={index} className="card mb-2" style={{ backgroundColor: '#e0f7fa' }}>
+                      <div className="card-body">{meeting}</div>
+                    </div>
+                  ))
+                ) : (
+                  <p style={{ color: '#30009c', fontWeight: 'bold' }}>No meeting scheduled</p>
+                )}
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={handleCloseModal}>
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

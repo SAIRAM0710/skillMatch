@@ -7,9 +7,9 @@ const Rating = () => {
   const navigate = useNavigate();
   const db = getFirestore();
   
-  // Get the booking ID and worker ID from state
-  const { bookingId, workerId } = location.state;
-  console.log(bookingId,workerId)
+  // Get the booking ID, worker ID, and service from state
+  const { bookingId, workerId, service } = location.state;
+  console.log(bookingId, workerId, service);
   
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
@@ -38,15 +38,18 @@ const Rating = () => {
       const workerSnap = await getDoc(userRef);
       if (workerSnap.exists()) {
         const workerData = workerSnap.data();
-        
-        // Update the user's rating and review
+
+        // Create a new review entry with service, rating, and review
+        const newReview = service+"*-*"+ rating+"*-*"+ review;
+
+        // Update the user's rating and reviews
         const updatedRating = workerData.rating + rating;
         const updatedCount = workerData.ratingGivenCount + 1;
-        
+
         await updateDoc(userRef, {
           rating: updatedRating,
           ratingGivenCount: updatedCount,
-          reviews: [...workerData.reviews, review],
+          reviews: [...workerData.reviews, newReview],  // Add the new review array
         });
 
         // Update booking's wratingstatus to 1

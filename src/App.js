@@ -13,9 +13,19 @@ import ClientService from './components/ClientService';
 import ClientRequest from './components/ClientRequest';
 import WorkerRequest from './components/WorkerRequest';
 import WorkerAccept from './components/WorkerAccept';
+import WorkerMeeting from './components/WorkerMeeting';
+import ViewReviews from './components/ViewReviews';
 import "bootstrap/dist/css/bootstrap.css";
 import ClientMeeting from './components/ClientMeeting';
 import Rating from './components/Rating';
+import WorkerHistory from './components/WorkerHistory';
+import AdminHome from './components/AdminHome';
+import AdminClient from './components/AdminClient';
+import AdminWorker from './components/AdminWorker';
+import AdminBooking from './components/AdminBooking';
+import Query from './components/Query';
+import AdminQuerys from './components/AdminQuerys';
+import Edit from './components/edit'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'react-bootstrap';
 
@@ -38,6 +48,16 @@ const App = () => {
         <Route path="/rating" element={<Rating />} />
         <Route path="/worker-request" element={<WorkerRequest />} />
         <Route path="/worker-accept" element={<WorkerAccept/>} />
+        <Route path="/worker-meeting" element={<WorkerMeeting/>}/>
+        <Route path="/worker-reviews" element={<ViewReviews/>}/>
+        <Route path="/worker-history" element={<WorkerHistory/>}/>
+        <Route path="/admin-home" element={<AdminHome/>}/>
+        <Route path="/admin-client" element={<AdminClient/>}/>
+        <Route path="/admin-worker" element={<AdminWorker/>}/>
+        <Route path="/admin-booking" element={<AdminBooking/>}/>
+        <Route path="/query" element={<Query/>}/>
+        <Route path="/admin-query" element={<AdminQuerys/>}/>
+        <Route path="/edit" element={<Edit/>}/>
         <Route path="/forgot-password" element={<div>Forgot Password Page</div>} />
       </Routes>
     </Router>

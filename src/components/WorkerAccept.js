@@ -13,6 +13,7 @@ const WorkerAccept = () => {
     const [selectedRequest, setSelectedRequest] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [showCompleteModal, setShowCompleteModal] = useState(false); // For success popup after complete
 
     // Get logged-in user data from session storage
     const storedUserData = JSON.parse(sessionStorage.getItem('userData'));
@@ -58,6 +59,15 @@ const WorkerAccept = () => {
         }
     };
 
+    // Handle completion of a request
+    const handleComplete = async (requestId) => {
+        const requestRef = doc(db, 'booking', requestId);
+        await updateDoc(requestRef, { status: 'Complete' });
+
+        // Show success popup after status update
+        setShowCompleteModal(true);
+    };
+
     return (
         <div className="container mt-4">
             {/* Back arrow to worker-home */}
@@ -79,6 +89,7 @@ const WorkerAccept = () => {
                         <th style={{ backgroundColor: '#3700B3', color: 'white' }}>Description</th>
                         <th style={{ backgroundColor: '#3700B3', color: 'white' }}>Last Meeting</th>
                         <th style={{ backgroundColor: '#3700B3', color: 'white' }}>Schedule Meeting</th>
+                        <th style={{ backgroundColor: '#3700B3', color: 'white' }}>Complete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -102,12 +113,21 @@ const WorkerAccept = () => {
                                             onClick={() => handleMeetingClick(request)}
                                         ></i>
                                     </td>
+                                    <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>
+                                        <Button 
+                                            variant="success" 
+                                            style={{ backgroundColor: '#28a745', borderColor: '#28a745' }} 
+                                            onClick={() => handleComplete(request.id)}
+                                        >
+                                            Complete
+                                        </Button>
+                                    </td>
                                 </tr>
                             );
                         })
                     ) : (
                         <tr>
-                            <td colSpan="7" className="text-center">No Accepted Requests</td>
+                            <td colSpan="8" className="text-center">No Accepted Requests</td>
                         </tr>
                     )}
                 </tbody>
@@ -141,6 +161,21 @@ const WorkerAccept = () => {
                     </Button>
                     <Button variant="primary" onClick={handleMeetingSubmit}>
                         Save Meeting
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Success Modal after completion */}
+            <Modal show={showCompleteModal} onHide={() => setShowCompleteModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Success</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Request has been successfully marked as <strong>Complete</strong>.
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={() => window.location.reload()}>
+                        OK
                     </Button>
                 </Modal.Footer>
             </Modal>

@@ -36,6 +36,7 @@ const Login = () => {
           address,
           contact,
           email,
+          role,
           id: user.uid
         }));
         
@@ -44,6 +45,9 @@ const Login = () => {
             navigate('/client-home', { state: { name, role } }); // Passing name and role to ClientHome
           } else if (role === 'Worker') {
             navigate('/worker-home', { state: { name, role } }); // Passing name and role to WorkerHome
+          }
+          else if (role === 'Admin') {
+            navigate('/admin-home', { state: { name, role } });
           }
         } else {
           setError('User data not found.');
