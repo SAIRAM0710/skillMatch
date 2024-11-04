@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase'; // Adjust the import according to your Firebase configuration
 import Swal from 'sweetalert2';
 
@@ -28,34 +28,29 @@ const AdminBooking = () => {
     fetchBookings();
   }, []);
 
-  // Stop booking function
-  const stopBooking = async (id) => {
-    try {
-      await updateDoc(doc(db, 'booking', id), { status: 'Stop' });
-      Swal.fire({
-        icon: 'success',
-        title: 'Successfully stopped',
-        confirmButtonText: 'OK'
-      }).then(() => window.location.reload());
-    } catch (error) {
-      console.error('Error stopping booking:', error);
-      Swal.fire('Error', 'Failed to stop booking', 'error');
-    }
-  };
-
-  // Delete booking function
-  const deleteBooking = async (id) => {
-    try {
-      await deleteDoc(doc(db, 'booking', id));
-      Swal.fire({
-        icon: 'success',
-        title: 'Successfully deleted',
-        confirmButtonText: 'OK'
-      }).then(() => window.location.reload());
-    } catch (error) {
-      console.error('Error deleting booking:', error);
-      Swal.fire('Error', 'Failed to delete booking', 'error');
-    }
+  // Cancel booking function with confirmation popup
+  const cancelBooking = async (id) => {
+    Swal.fire({
+      title: 'Want to stop the service?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await updateDoc(doc(db, 'booking', id), { status: 'Stopped by Admin' });
+          Swal.fire({
+            icon: 'success',
+            title: 'Service stopped successfully',
+            confirmButtonText: 'OK'
+          }).then(() => window.location.reload());
+        } catch (error) {
+          console.error('Error stopping booking:', error);
+          Swal.fire('Error', 'Failed to stop booking', 'error');
+        }
+      }
+    });
   };
 
   return (
@@ -94,27 +89,12 @@ const AdminBooking = () => {
               </td>
               <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>{booking.status}</td>
               <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>
-                {['In-Progress', 'Pending'].includes(booking.status) ? (
-                  <>
-                    <button
-                      className="btn btn-warning btn-sm me-2"
-                      onClick={() => stopBooking(booking.id)}
-                    >
-                      Stop
-                    </button>
-                    <button
-                      className="btn btn-danger btn-sm"
-                      onClick={() => deleteBooking(booking.id)}
-                    >
-                      Delete
-                    </button>
-                  </>
-                ) : (
+                {['In-Progress', 'Pending'].includes(booking.status) && (
                   <button
-                    className="btn btn-danger btn-sm"
-                    onClick={() => deleteBooking(booking.id)}
+                    className="btn btn-warning btn-sm"
+                    onClick={() => cancelBooking(booking.id)}
                   >
-                    Delete
+                    Cancel
                   </button>
                 )}
               </td>

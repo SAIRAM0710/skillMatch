@@ -97,7 +97,7 @@ const ClientService = () => {
                 />
               </td>
               <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>
-                {booking.status === 'Pending' ? (
+                {(booking.status === 'Pending' || booking.status === 'Stopped by Admin') ? (
                   'N/A'
                 ) : (
                   booking.wratingstatus === 0 ? (
