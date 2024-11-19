@@ -58,7 +58,9 @@ const Query = () => {
         <i
           className="bi bi-arrow-left-circle-fill"
           style={{ fontSize: '2rem', cursor: 'pointer', top: '10px', left: '10px' }}
-          onClick={handleBackNavigation} // Use the back navigation handler
+          onClick={handleBackNavigation}
+          role="button"
+          aria-label="Go back to the previous screen"
         ></i>
         <button
           className="btn btn-primary"
@@ -66,13 +68,15 @@ const Query = () => {
             Swal.fire({
               title: 'Ask a Question',
               input: 'textarea',
-              inputAttributes: { maxlength: 100 },
+              inputAttributes: { maxlength: 100, 'aria-label': 'Enter your question' },
+              inputLabel: 'Your question:',
               showCancelButton: true,
               confirmButtonText: 'Submit',
             }).then((result) => {
-              if (result.isConfirmed && result.value.trim() !== '') {
+              // Check if a value is provided before proceeding
+              if (result.isConfirmed && result.value && result.value.trim() !== '') {
                 handleAskQuestion(result.value); // Pass question directly to handleAskQuestion
-              } else if (!result.value.trim()) {
+              } else if (result.isConfirmed && (!result.value || result.value.trim() === '')) {
                 Swal.fire('Please enter a question');
               }
             });

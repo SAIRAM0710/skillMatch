@@ -64,7 +64,7 @@ const Header = () => {
             <Link to="/query" className="text-light mr-3" style={{ textDecoration: 'none', marginRight: '30px' }}>
               <b>Queries</b>
             </Link>
-            <Link to="/edit" className="text-light mr-3" style={{ textDecoration: 'none', marginRight: '30px' }}>
+            <Link to="/edit" className="text-light mr-3" style={{ textDecoration: 'none', marginRight: '30px' }} aria-label="Edit Profile">
               <i className="bi bi-person-circle" style={{ fontSize: '1.5rem' }}></i>
             </Link>
             <Logout />

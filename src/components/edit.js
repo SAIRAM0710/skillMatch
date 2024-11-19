@@ -116,20 +116,22 @@ const Edit = () => {
         {error && <p className="text-danger text-center">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group mb-3">
-            <label>Name</label>
+            <label htmlFor="name">Name</label>
             <input
               type="text"
               className="form-control"
+              id="name" 
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
           <div className="form-group mb-3">
-            <label>Email</label>
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               className="form-control"
+              id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -137,21 +139,23 @@ const Edit = () => {
             />
           </div>
           <div className="form-group mb-3">
-            <label>Contact</label>
+            <label htmlFor="contact">Contact</label>
             <input
               type="text"
               className="form-control"
+              id="contact"
               value={contact}
               onChange={(e) => setContact(e.target.value)}
               required
             />
           </div>
           <div className="form-group mb-3">
-            <label>Address</label>
+            <label htmlFor="address">Address</label>
             <input
               type="text"
               className="form-control"
-              value={address}
+              id="address"
+              value={address} 
               onChange={(e) => setAddress(e.target.value)}
               required
             />
@@ -159,7 +163,7 @@ const Edit = () => {
           {role === 'Worker' && (
             <>
               <div className="form-group mb-3">
-                <label>Services</label>
+                <label htmlFor="service">Services</label>
                 <select
                   className="form-control"
                   value={selectedService}

@@ -116,7 +116,7 @@ const WorkerAccept = () => {
                                     <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>
                                         <Button 
                                             variant="success" 
-                                            style={{ backgroundColor: '#28a745', borderColor: '#28a745' }} 
+                                            style={{ backgroundColor: '#007b3a', borderColor: '#007b3a' }} 
                                             onClick={() => handleComplete(request.id)}
                                         >
                                             Complete
@@ -141,12 +141,13 @@ const WorkerAccept = () => {
                 <Modal.Body>
                     <Form>
                         <Form.Group>
-                            <Form.Label>Select Date and Time</Form.Label>
+                            <Form.Label htmlFor="meetingDate">Select Date and Time</Form.Label>
                             <DatePicker
+                                aria-labelledby="meetingDateLabel"
                                 selected={selectedDate}
                                 onChange={(date) => setSelectedDate(date)}
                                 showTimeSelect
-                                timeFormat="HH:mm"
+                                timeFormat="HH:mm"  
                                 timeIntervals={15}
                                 dateFormat="dd-MM-yyyy HH:mm"
                                 minDate={new Date()} // Prevent past dates

@@ -26,21 +26,25 @@ const AdminQuerys = () => {
       title: 'Enter Answer',
       input: 'textarea',
       inputAttributes: { maxlength: 200 },
+      inputLabel: 'Your question:',
       showCancelButton: true,
       confirmButtonText: 'Submit',
     }).then(async (result) => {
-      if (result.isConfirmed && result.value.trim()) {
-        const answer = result.value;
-        const queryRef = doc(db, 'query', queryId);
-        await updateDoc(queryRef, { A: answer });
-        Swal.fire('Answer submitted successfully').then(() => {
-          window.location.reload(); // Refresh the page
-        });
-      } else if (!result.value.trim()) {
-        Swal.fire('Please enter an answer');
+      if (result.isConfirmed) {
+        const answer = result.value?.trim(); // Safely access and trim the value
+        if (answer) {
+          const queryRef = doc(db, 'query', queryId);
+          await updateDoc(queryRef, { A: answer });
+          Swal.fire('Answer submitted successfully').then(() => {
+            window.location.reload(); // Refresh the page
+          });
+        } else {
+          Swal.fire('Please enter an answer');
+        }
       }
     });
   };
+  
 
   return (
     <div className="container mt-4">

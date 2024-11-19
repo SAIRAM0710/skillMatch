@@ -88,9 +88,11 @@ const Signup = () => {
             <input
               type="text"
               className="form-control"
+              id="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
+              title="Enter the Name"
             />
           </div>
           <div className="form-group mb-3">
@@ -98,9 +100,11 @@ const Signup = () => {
             <input
               type="email"
               className="form-control"
+              id="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              title="Enter the Email"
             />
           </div>
           <div className="form-group mb-3">
@@ -108,9 +112,11 @@ const Signup = () => {
             <input
               type="password"
               className="form-control"
+              id="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              title='Enter the password'
             />
           </div>
           <div className="form-group mb-3">
@@ -118,9 +124,11 @@ const Signup = () => {
             <input
               type="text"
               className="form-control"
+              id= "contact"
               value={contact}
               onChange={(e) => setContact(e.target.value)}
               required
+              title="Enter the Contact"
             />
           </div>
           <div className="form-group mb-3">
@@ -128,14 +136,17 @@ const Signup = () => {
             <input
               type="text"
               className="form-control"
+              id="Address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               required
+              title="enter the address"
             />
           </div>
           <div className="form-group mb-3">
-            <label>Role</label>
+            <label htmlFor="roleSelect">Role</label>
             <select
+              id="roleSelect"
               className="form-control"
               value={role}
               onChange={(e) => {
@@ -144,6 +155,7 @@ const Signup = () => {
                   setService([]);
                 }
               }}
+              aria-labelledby="roleSelect"
             >
               <option value="Client">Client</option>
               <option value="Worker">Worker</option>

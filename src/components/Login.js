@@ -81,21 +81,25 @@ const Login = () => {
               <div className="form-group pb-3">
                 <input
                   type="email"
+                  id="email"
                   placeholder="Email"
                   className="form-control"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  title="Enter your Email"
                 />
               </div>
               <div className="form-group pb-3">
                 <input
                   type="password"
+                  id="passwords"
                   placeholder="Password"
                   className="form-control"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  title="Enter your password"
                 />
               </div>
               <div className="pb-2">
