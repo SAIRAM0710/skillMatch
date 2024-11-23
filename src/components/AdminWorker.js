@@ -36,11 +36,11 @@ const AdminWorker = () => {
 
   return (
     <div className="container mt-4">
-      <i
+      <span
         className="bi bi-arrow-left-circle-fill"
         style={{ fontSize: '2rem', cursor: 'pointer', top: '10px', right: '10px' }}
         onClick={() => navigate('/admin-home')}
-      ></i>
+      ></span>
       
       <h2 className="text-center mb-4" style={{ fontWeight: 'bold', color: '#3700B3' }}>Workers</h2>
 
@@ -68,11 +68,11 @@ const AdminWorker = () => {
                 ))}
               </td>
               <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>
-                <i
+                <span
                   className="bi bi-trash-fill"
                   style={{ cursor: 'pointer', color: 'red' }}
                   onClick={() => deleteWorker(worker.id)}
-                ></i>
+                ></span>
               </td>
             </tr>
           ))}

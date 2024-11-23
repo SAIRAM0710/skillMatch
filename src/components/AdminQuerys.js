@@ -49,11 +49,11 @@ const AdminQuerys = () => {
   return (
     <div className="container mt-4">
       <div className="d-flex justify-content-start">
-        <i
+        <span
           className="bi bi-arrow-left-circle-fill"
           style={{ fontSize: '2rem', cursor: 'pointer', top: '10px', left: '10px' }}
           onClick={() => navigate('/admin-home')} // Navigate to Admin home on click
-        ></i>
+        ></span>
       </div>
       <h2 className="text-center mt-4" style={{ fontWeight: 'bold', color: '#3700B3' }}>Unanswered Queries</h2>
       

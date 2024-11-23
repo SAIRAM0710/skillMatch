@@ -35,11 +35,11 @@ const WorkerHistory = () => {
   return (
     <div className="container mt-4">
       {/* Back Button */}
-      <i 
+      <span 
         className="bi bi-arrow-left-circle-fill" 
         style={{ fontSize: '2rem', cursor: 'pointer',top: '10px', left: '10px' }} 
         onClick={() => navigate('/worker-home')}
-      ></i>
+      ></span>
 
       {/* Heading */}
       <h2 className="text-center my-4" style={{ fontWeight: 'bold', color: '#3700B3' }}>Completed Service</h2>

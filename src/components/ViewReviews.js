@@ -39,11 +39,11 @@ const ViewReviews = () => {
   return (
     <div className="container mt-5">
       {/* Back Arrow Icon */}
-      <i 
+      <span
         className="bi bi-arrow-left-circle-fill" 
         style={{ fontSize: '2rem', cursor: 'pointer',top: '10px', left: '10px' }} 
         onClick={() => navigate('/worker-home')}
-      ></i>
+      ></span>
 
       <h2 className="text-center mb-4" style={{ fontWeight: 'bold', color: '#3700B3' }}>Your Reviews</h2>
 
@@ -55,7 +55,7 @@ const ViewReviews = () => {
 
             // Generate stars based on rating
             const stars = Array.from({ length: rating }, (_, i) => (
-              <i key={i} className="bi bi-star-fill text-warning"></i>
+              <span key={i} className="bi bi-star-fill text-warning"></span>
             ));
 
             return (

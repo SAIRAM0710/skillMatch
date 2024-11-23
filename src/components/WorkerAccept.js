@@ -71,11 +71,11 @@ const WorkerAccept = () => {
     return (
         <div className="container mt-4">
             {/* Back arrow to worker-home */}
-            <i 
+            <span 
                 className="bi bi-arrow-left-circle-fill" 
                 style={{ fontSize: '2rem', cursor: 'pointer', top: '10px', left: '10px' }} 
                 onClick={() => navigate('/worker-home')}
-            ></i>
+            ></span>
 
             <h2 className="text-center mb-4" style={{ fontWeight: 'bold', color: '#3700B3' }}>Accepted Requests</h2>
 
@@ -107,11 +107,11 @@ const WorkerAccept = () => {
                                     <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>{request.description}</td>
                                     <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>{lastMeeting}</td>
                                     <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>
-                                        <i 
+                                        <span 
                                             className="bi bi-calendar-event-fill" 
                                             style={{ fontSize: '1.5rem', cursor: 'pointer', color:'#6200EE' }} 
                                             onClick={() => handleMeetingClick(request)}
-                                        ></i>
+                                        ></span>
                                     </td>
                                     <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>
                                         <Button 

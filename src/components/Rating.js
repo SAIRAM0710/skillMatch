@@ -75,12 +75,12 @@ const Rating = () => {
         <div className="card-body">
           <div className="text-center mb-3">
             {[1, 2, 3, 4, 5].map((star) => (
-              <i
+              <span
                 key={star}
                 className={`bi bi-star${star <= rating ? '' : '-fill'}`}
                 onClick={() => setRating(star)}
                 style={{ cursor: 'pointer', fontSize: '1.5rem', color: star <= rating ? '#FFD700' : '#ccc' }}
-              />
+              ></span>
             ))}
           </div>
           <textarea

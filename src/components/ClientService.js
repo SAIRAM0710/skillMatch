@@ -90,24 +90,24 @@ const ClientService = () => {
               <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>{booking.wmail}</td>
               <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>{booking.status}</td>
               <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>
-                <i
+                <span
                   className="bi bi-calendar-date"
                   onClick={() => handleShowMeeting(booking)}
                   style={{ cursor: 'pointer' }}
-                />
+                ></span>
               </td>
               <td style={{ backgroundColor: '#f2e7fe', color: 'black' }}>
                 {(booking.status === 'Pending' || booking.status === 'Stopped by Admin') ? (
                   'N/A'
                 ) : (
                   booking.wratingstatus === 0 ? (
-                    <i
+                    <span
                       className="bi bi-star"
                       onClick={() => navigate('/rating', { state: { bookingId: booking.id, workerId: booking.wid, service: booking.service } })}
                       style={{ cursor: 'pointer' }}
-                    />
+                    ></span>
                   ) : (
-                    <i className="bi bi-star-fill" />
+                    <span className="bi bi-star-fill" ></span>
                   )
                 )}
               </td>

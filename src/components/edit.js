@@ -101,7 +101,7 @@ const Edit = () => {
   return (
     <div className="container mt-5">
       {/* Back icon positioned at the top left */}
-      <i
+      <span
         className="bi bi-arrow-left-circle-fill"
         style={{
           fontSize: '2rem',
@@ -110,7 +110,7 @@ const Edit = () => {
           left: '10px',
         }}
         onClick={handleBack}
-      ></i>
+      ></span>
       <div className="card mt-4 p-4">
         <h1 className="text-center font-weight-bold">Edit Profile</h1>
         {error && <p className="text-danger text-center">{error}</p>}

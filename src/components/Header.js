@@ -47,7 +47,7 @@ const Header = () => {
       <div className="d-flex align-items-center">
         {isLoggedIn && role === 'Client' && (
           <Link to="/client-service" className="text-light mr-3" style={{ textDecoration: 'none', marginRight: '30px' }}>
-            <b>Service</b>
+            <strong>Service</strong>
           </Link>
         )}
 
@@ -62,10 +62,10 @@ const Header = () => {
         {isLoggedIn && (
           <>
             <Link to="/query" className="text-light mr-3" style={{ textDecoration: 'none', marginRight: '30px' }}>
-              <b>Queries</b>
+              <strong>Queries</strong>
             </Link>
             <Link to="/edit" className="text-light mr-3" style={{ textDecoration: 'none', marginRight: '30px' }} aria-label="Edit Profile">
-              <i className="bi bi-person-circle" style={{ fontSize: '1.5rem' }}></i>
+              <span className="bi bi-person-circle" style={{ fontSize: '1.5rem' }}></span>
             </Link>
             <Logout />
           </>

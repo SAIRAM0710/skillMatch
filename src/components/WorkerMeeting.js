@@ -62,11 +62,11 @@ const WorkerMeeting = () => {
   return (
     <div className="container mt-5">
       {/* Back Arrow Icon */}
-      <i 
+      <span
         className="bi bi-arrow-left-circle-fill" 
         style={{ fontSize: '2rem', cursor: 'pointer', top: '10px', left: '10px' }} 
         onClick={() => navigate('/worker-home')}
-      ></i>
+      ></span>
 
       <h2 className="text-center mb-4" style={{ fontWeight: 'bold', color: '#3700B3' }}>Meetings</h2>
 

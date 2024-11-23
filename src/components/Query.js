@@ -55,13 +55,13 @@ const Query = () => {
   return (
     <div className="container mt-4">
       <div className="d-flex justify-content-between align-items-center">
-        <i
+        <span
           className="bi bi-arrow-left-circle-fill"
           style={{ fontSize: '2rem', cursor: 'pointer', top: '10px', left: '10px' }}
           onClick={handleBackNavigation}
           role="button"
           aria-label="Go back to the previous screen"
-        ></i>
+        ></span>
         <button
           className="btn btn-primary"
           onClick={() => {

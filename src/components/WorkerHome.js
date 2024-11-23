@@ -15,11 +15,11 @@ const WorkerHome = () => {
     <div className="main-content fullContainer">
       {/* Top-right corner history icon */}
       <div className="top-right-icon" style={{ position: 'absolute', top: '80px', right: '30px' }}>
-          <i 
+          <span 
             className="bi bi-clock-history" 
             style={{ fontSize: '2rem', cursor: 'pointer', color: '#6200EE' }}
             onClick={() => navigate('/worker-history')}  
-          ></i>
+          ></span>
         </div>
 
       <div className="header bg-gradient-primary pb-8 pt-5 pt-md-8">

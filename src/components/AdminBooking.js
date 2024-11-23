@@ -55,11 +55,11 @@ const AdminBooking = () => {
 
   return (
     <div className="container mt-4">
-      <i
+      <span
         className="bi bi-arrow-left-circle-fill"
         style={{ fontSize: '2rem', cursor: 'pointer', top: '10px', right: '10px' }}
         onClick={() => navigate('/admin-home')}
-      ></i>
+      ></span>
       
       <h2 className="text-center mb-4" style={{ fontWeight: 'bold', color: '#3700B3' }}>Bookings</h2>
 
